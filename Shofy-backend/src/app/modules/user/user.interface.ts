@@ -4,7 +4,11 @@ import {IExistingUser} from "../auth/auth.interface";
 export type IUser = {
   email: string;
   password: string;
-  name: string;
+  name: {
+    firstName: string;
+    lastName: string;
+  };
+  phoneNumber:string
 };
 export type IUserMethods = {
   isUserExist(email: string): Promise<IExistingUser | null>;

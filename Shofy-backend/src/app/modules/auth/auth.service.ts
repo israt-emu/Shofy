@@ -7,12 +7,7 @@ import {ILoginResponse, ILoginUser, IRefreshTokenResponse} from "./auth.interfac
 import {createToken, verifyToken} from "../../../shared/jwtHelpers";
 import {Secret} from "jsonwebtoken";
 
-
 export const createUserService = async (user: IUser): Promise<Partial<IUser> | null> => {
-  //set password
-  if (!user.password) {
-    user.password = config.default_user_pass as string;
-  }
   //creating user
   const newUser = (await User.create(user)).toObject();
   if (!newUser) {
@@ -31,12 +26,12 @@ export const loginUserService = async (payload: ILoginUser): Promise<ILoginRespo
   if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, "User doesn't found");
   }
-const isPasswordMatched=await user.isPasswordMatched(password, isUserExist.password)
+  const isPasswordMatched = await user.isPasswordMatched(password, isUserExist.password);
   if (isUserExist.password && !isPasswordMatched) {
     throw new ApiError(httpStatus.UNAUTHORIZED, "password is incorrect");
   }
   //create accesstoken & refresh token
-  const {_id: userId, email:userEmail} = isUserExist;
+  const {_id: userId, email: userEmail} = isUserExist;
   const accessToken = createToken({userId, userEmail}, config.jwt.secret as Secret, {
     expiresIn: config.jwt.expires_in,
   });
@@ -58,14 +53,13 @@ export const refreshTokenService = async (token: string): Promise<IRefreshTokenR
     throw new ApiError(httpStatus.FORBIDDEN, "Invalid refresh token");
   }
   const {userId, userEmail} = verifiedToken;
-  
-    const user = new User();
-    const isUserExist = await user.isUserExistById(userId);
-    if (!isUserExist) {
-      throw new ApiError(httpStatus.NOT_FOUND, "user doesn't found");
-    }
-    newAccessToken = createToken({userId: isUserExist._id, userEmail: isUserExist.email,}, config.jwt.secret as Secret, {expiresIn: config.jwt.expires_in});
-  
+
+  const user = new User();
+  const isUserExist = await user.isUserExistById(userId);
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, "user doesn't found");
+  }
+  newAccessToken = createToken({userId: isUserExist._id, userEmail: isUserExist.email}, config.jwt.secret as Secret, {expiresIn: config.jwt.expires_in});
 
   return {
     accessToken: newAccessToken,

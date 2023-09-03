@@ -11,17 +11,29 @@ const UserSchema = new Schema<IUser, UserModel>(
       required: true,
       unique: true,
     },
-    
+
     password: {
       type: String,
       required: true,
       select: 0,
     },
     name: {
+      type: {
+        firstName: {
+          type: String,
+          required: true,
+        },
+        lastName: {
+          type: String,
+          required: true,
+        },
+      },
+      required: true,
+    },
+    phoneNumber: {
       type: String,
       required: true,
     },
-    
   },
   {
     timestamps: true,
@@ -32,7 +44,7 @@ const UserSchema = new Schema<IUser, UserModel>(
 );
 //check user existence
 UserSchema.methods.isUserExist = async function (email: string): Promise<IExistingUser | null> {
-  return await User.findOne({email}, {_id: 1, password: 1,  email: 1}).lean();
+  return await User.findOne({email}, {_id: 1, password: 1, email: 1}).lean();
 };
 //check by id
 UserSchema.methods.isUserExistById = async function (id: string): Promise<IExistingUser | null> {

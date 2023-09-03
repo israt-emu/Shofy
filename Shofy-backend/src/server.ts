@@ -35,10 +35,3 @@ const db = async () => {
   });
 };
 db();
-//signal terminal
-process.on("SIGTERM", () => {
-  console.log("SIGTERM is recieved");
-  if (server) {
-    server.close();
-  }
-});
