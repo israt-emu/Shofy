@@ -7,6 +7,9 @@ export type IProduct = {
   name: string;
   status: string;
   price: number;
+  sku: string;
+  subCategory: string;
+  color: string;
   category: string;
   description: string;
   image?: string;
