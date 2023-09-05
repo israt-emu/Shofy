@@ -8,12 +8,17 @@ export type IProduct = {
   status: string;
   price: number;
   sku: string;
+  size: number;
   subCategory: string;
   color: string;
   category: string;
   description: string;
   image?: string;
-  review: Review[];
+  rating: number[];
+  weight: string;
+  dimension: string;
+  version: string[];
+  quantity: number;
   addedBy: Types.ObjectId | IUser;
 };
 export type IProductFilters = {

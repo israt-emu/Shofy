@@ -9,39 +9,40 @@ import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {Input} from "@/components/ui/input";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {useGetProductsQuery} from "@/redux/features/products/productApi";
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-];
+// const data: Payment[] = [
+//   {
+//     id: "m5gr84i9",
+//     amount: 316,
+//     status: "success",
+//     email: "ken99@yahoo.com",
+//   },
+//   {
+//     id: "3u1reuv4",
+//     amount: 242,
+//     status: "success",
+//     email: "Abe45@gmail.com",
+//   },
+//   {
+//     id: "derv1ws0",
+//     amount: 837,
+//     status: "processing",
+//     email: "Monserrat44@gmail.com",
+//   },
+//   {
+//     id: "5kma53ae",
+//     amount: 874,
+//     status: "success",
+//     email: "Silas22@gmail.com",
+//   },
+//   {
+//     id: "bhqecj4p",
+//     amount: 721,
+//     status: "failed",
+//     email: "carmella@hotmail.com",
+//   },
+// ];
 
 export type Payment = {
   id: string;
@@ -64,28 +65,28 @@ export const columns: ColumnDef<Payment>[] = [
     cell: ({row}) => <div className="capitalize">{row.getValue("status")}</div>,
   },
   {
-    accessorKey: "email",
+    accessorKey: "category",
     header: ({column}) => {
       return (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-          Email
+          Category
           {/* <CaretSortIcon className="ml-2 h-4 w-4" /> */}
         </Button>
       );
     },
-    cell: ({row}) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({row}) => <div className="lowercase">{row.getValue("category")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "price",
+    header: () => <div className="text-right">Price</div>,
     cell: ({row}) => {
-      const amount = parseFloat(row.getValue("amount"));
+      const price = parseFloat(row.getValue("price"));
 
       // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
+      const formatted = new Intl.NumberFormat("bn-BD", {
         style: "currency",
-        currency: "USD",
-      }).format(amount);
+        currency: "BD",
+      }).format(price);
 
       return <div className="text-right font-medium">{formatted}</div>;
     },
@@ -118,13 +119,14 @@ export const columns: ColumnDef<Payment>[] = [
 ];
 
 export function ProductTable() {
+  const {data} = useGetProductsQuery("");
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
   const table = useReactTable({
-    data,
+    data: data?.data,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -145,7 +147,7 @@ export function ProductTable() {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        <Input placeholder="Filter emails..." value={(table.getColumn("email")?.getFilterValue() as string) ?? ""} onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)} className="max-w-sm" />
+        <Input placeholder="Filter emails..." value={(table.getColumn("category")?.getFilterValue() as string) ?? ""} onChange={(event) => table.getColumn("category")?.setFilterValue(event.target.value)} className="max-w-sm" />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

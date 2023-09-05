@@ -1,34 +1,36 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import logo from "../../assets/logo.jpg";
-// import {useLoginMutation} from "../../redux/features/auth/authApi";
+import logo from "../../assets/logo.png";
 import Swal from "sweetalert2";
+import {useLoginMutation} from "@/redux/features/auth/authApi";
+import {MdEmail, MdPassword} from "react-icons/md";
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //   const [login, {data, isLoading, error: responseError}] = useLoginMutation();
-  //   const navigate = useNavigate();
+  const [login, {data, isLoading, error: responseError}] = useLoginMutation();
+  const navigate = useNavigate();
   //
 
-  //   useEffect(() => {
-  //     if (!data?.success && responseError) {
-  //       Swal.fire("Oops!", `Something Went wrong`, "error");
-  //     }
-  //     if (data?.success && data?.data?.accessToken) {
-  //       navigate("/allbooks");
-  //     }
-  //   }, [data, responseError, navigate]);
-  //login
+  useEffect(() => {
+    if (!data?.success && responseError) {
+      Swal.fire("Oops!", `Something Went wrong`, "error");
+    }
+    if (data?.success && data?.data?.accessToken) {
+      Swal.fire("Congratulations!", `Logged In successfully!`, "success");
+      navigate("/");
+    }
+  }, [data, responseError, navigate]);
 
+  //login
   const handleLogin = (e: {preventDefault: () => void}): void => {
     e.preventDefault();
 
     if (email !== "" && password !== "") {
-      //   login({
-      //     email,
-      //     password,
-      //   });
+      login({
+        email,
+        password,
+      });
     } else {
       Swal.fire("Sorry!", `Please fill up all required fields`, "info");
     }
@@ -49,19 +51,15 @@ const LoginForm = () => {
         <form className=" ng-untouched ng-pristine ng-valid" onSubmit={handleLogin}>
           <div className="w-4/6 mx-auto">
             <div className="flex mb-6">
-              <input type="email" className="rounded-none rounded-l-lg block flex-1 min-w-0 w-full text-sm p-2.5 border border-gray-400" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
-              <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-r-md border border-l-0 border-gray-400 ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" />
-                </svg>
+              <input type="email" className="signup-input" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
+              <span className="input-right-icon ">
+                <MdEmail className="w-5 h-5" />
               </span>
             </div>
             <div className="flex">
-              <input type="password" required className="rounded-none rounded-l-lg border text-gray-900  focus:border-main block flex-1 min-w-0 w-full text-sm border-gray-400 p-2.5" placeholder="*****" value={password} onChange={(e) => setPassword(e.target.value)} />
-              <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-r-md border border-l-0 border-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-                </svg>
+              <input type="password" required className="signup-input" placeholder="*****" value={password} onChange={(e) => setPassword(e.target.value)} />
+              <span className="input-right-icon">
+                <MdPassword className="w-5 h-5" />
               </span>
             </div>
             <div>
@@ -78,12 +76,8 @@ const LoginForm = () => {
           </div>
           <div className="space-y-2 w-4/6 mx-auto">
             <div>
-              <button
-                type="submit"
-                className="w-full px-8 py-3 font-semibold rounded-md bg-primary text-gray-300 mt-8 flex justify-center items-center"
-                //   disabled={isLoading}
-              >
-                {/* {isLoading && <svg className="animate-spin h-5 w-5 mr-3 text-white rounded-full border-4 border-solid border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" viewBox="0 0 24 24"></svg>} */}
+              <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md bg-primary text-gray-300 mt-8 flex justify-center items-center" disabled={isLoading}>
+                {isLoading && <svg className="animate-spin h-5 w-5 mr-3 text-white rounded-full border-4 border-solid border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" viewBox="0 0 24 24"></svg>}
                 <span>Login</span>
               </button>
             </div>

@@ -1,6 +1,6 @@
 import {Button} from "@/components/ui/button";
 import {Link} from "react-router-dom";
-import banner from "../../../assets/banner.jpg";
+import banner from "../../assets/banner.jpg";
 const Banner = () => {
   return (
     <section className="bg-gray-100 text-gray-800 ">
@@ -14,7 +14,7 @@ const Banner = () => {
           <h3 className="mt-6 mb-8 text-2xl font-semibold text-sky-400 font-serif">Up to 70% off</h3>
           <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
             <Link to={"/products"}>
-              <Button variant={"outline"} className="bg-white text-gray-700">
+              <Button variant={"outline"} className="bg-white text-gray-700 hover:bg-black hover:text-gray-200">
                 Shop Collection
               </Button>
             </Link>

@@ -11,8 +11,27 @@ const ProductSchema = new Schema<IProduct, ProductModel>(
       type: Number,
       required: true,
     },
-
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    sku: {
+      type: String,
+      required: true,
+    },
+    size: {
+      type: Number,
+      required: true,
+    },
     category: {
+      type: String,
+      required: true,
+    },
+    subCategory: {
+      type: String,
+      required: true,
+    },
+    color: {
       type: String,
       required: true,
     },
@@ -23,16 +42,18 @@ const ProductSchema = new Schema<IProduct, ProductModel>(
     description: {
       type: String,
     },
-    review: [
+    rating: [
       {
-        review: {
-          type: Number,
-        },
+        type: Number,
       },
     ],
     image: {
       type: String,
     },
+    dimension: {
+      type: String,
+    },
+    version: [{type: String}],
     addedBy: {
       type: Schema.Types.ObjectId,
       required: true,
