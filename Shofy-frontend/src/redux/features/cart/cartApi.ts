@@ -1,5 +1,5 @@
 import {api} from "../../api/apiSlice";
-
+//api for cart operation
 export const cartApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getSingleCart: builder.query({

@@ -10,6 +10,8 @@ import ProductManage from "@/pages/ProductManage";
 import ProductDetails from "@/pages/ProductDetails";
 import Cart from "@/pages/Cart";
 import AddProduct from "@/pages/AddProduct";
+import EditProduct from "@/pages/EditProduct";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
   {
@@ -26,24 +28,52 @@ const routes = createBrowserRouter([
       },
       {
         path: "/product-details/:id",
-        element: <ProductDetails />,
+        element: (
+          <PrivateRoute>
+            <ProductDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/seller",
-        element: <Dashboard />,
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
       },
 
       {
         path: "/dashboard/manage",
-        element: <ProductManage />,
+        element: (
+          <PrivateRoute>
+            <ProductManage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/addProduct",
-        element: <AddProduct />,
+        element: (
+          <PrivateRoute>
+            <AddProduct />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/editProduct/:editId",
+        element: (
+          <PrivateRoute>
+            <EditProduct />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
       },
     ],
   },

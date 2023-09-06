@@ -8,7 +8,8 @@ export type IUser = {
     firstName: string;
     lastName: string;
   };
-  phoneNumber:string
+  phoneNumber:string;
+  seller:boolean;
 };
 export type IUserMethods = {
   isUserExist(email: string): Promise<IExistingUser | null>;

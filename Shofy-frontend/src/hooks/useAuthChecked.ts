@@ -8,7 +8,6 @@ export const useAuthCheck = () => {
   const dispatch = useAppDispatch();
   const [authChecked, setAuthChecked] = useState(false);
   useEffect(() => {
-    console.log(useAuth);
     if (!useAuth) {
       dispatch(userLoggedOut());
     } else {

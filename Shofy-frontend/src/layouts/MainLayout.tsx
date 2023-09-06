@@ -2,7 +2,7 @@ import Footer from "@/components/shared/Footer";
 import Navbar from "@/components/shared/Navbar";
 import Sidebar from "@/components/shared/Sidebar";
 import {Outlet, useLocation} from "react-router-dom";
-
+//layout of this website that render depending on route
 const MainLayout = () => {
   const location = useLocation();
   return location.pathname.includes("/dashboard") ? (
@@ -12,7 +12,7 @@ const MainLayout = () => {
           {" "}
           <Sidebar />
         </div>
-        <div className={`text-primary overflow-y-scroll no-scrollbar col-start-3 transition-all duration-300 pr-8 col-end-13 h-screen mt-20 z-0`}>
+        <div className={`text-primary overflow-y-scroll no-scrollbar col-start-3 transition-all duration-300 pr-8 col-end-13 h-screen mt-8 z-0 pb-8`}>
           <Outlet />
         </div>
       </div>

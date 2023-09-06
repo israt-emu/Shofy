@@ -19,5 +19,8 @@ export const createUserZodSchema = z.object({
     phoneNumber: z.string({
       required_error: "Phone Number is required",
     }),
+    seller: z.boolean({
+      required_error: "seller is required",
+    }),
   }),
 });

@@ -48,10 +48,10 @@
     --ring: 240 4.9% 83.9%;
   }
   .link-active {
-    @apply bg-sky-800 text-gray-200;
+    @apply bg-gray-400 text-gray-700;
   }
   .link-hover:hover {
-    @apply bg-gray-400;
+    @apply bg-gray-200;
   }
   .link-styles {
     @apply flex gap-1 items-center py-3 px-3 font-semibold;

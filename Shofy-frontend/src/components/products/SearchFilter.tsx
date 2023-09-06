@@ -45,7 +45,7 @@ const SearchFilter = ({data}: IProductsProps) => {
       <div className="space-y-3 ">
         <h1 className="text-2xl uppercase">Filter</h1>
         <div className="flex items-center justify-between mb-2">
-          <select name="" id="" className="py-2 px-2 outline-none capitalize border border-primary" onChange={(e) => selectCategory(e.target.value)}>
+          <select name="" id="" className="w-4/5 py-2 px-2 outline-none capitalize border border-primary" onChange={(e) => selectCategory(e.target.value)}>
             <option value="">Select Category</option>
             {category?.map((s: string, i: number) => (
               <option key={i} value={s}>
@@ -55,7 +55,7 @@ const SearchFilter = ({data}: IProductsProps) => {
           </select>
         </div>
         <div className="flex items-center justify-between">
-          <select name="" id="" className="py-2 px-2 outline-none border border-primary" onChange={(e) => selectSubCategory(e.target.value)}>
+          <select name="" id="" className="w-4/5 py-2 px-2 outline-none border border-primary" onChange={(e) => selectSubCategory(e.target.value)}>
             <option value="">Select SubCategory</option>
             {data?.map((s: IProduct, i: number) => (
               <option key={i} value={s?.subCategory}>

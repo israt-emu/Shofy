@@ -12,10 +12,11 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [repetPassword, setRepetPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [seller, setSeller] = useState(false);
   const [signUp, {data: responseData, isLoading, error: responseError}] = useSignUpMutation();
   const navigate = useNavigate();
 
-  //
+  //showing success or error message when signup
   useEffect(() => {
     if (!responseData?.success && responseError) {
       Swal.fire("Oops!", `Something Went wrong`, "error");
@@ -41,6 +42,7 @@ const SignUp = () => {
         email,
         phoneNumber: phone,
         password,
+        seller,
       };
       signUp(data);
     }
@@ -100,6 +102,10 @@ const SignUp = () => {
                   <span className="input-right-icon">
                     <MdPassword className="w-5 h-5" />
                   </span>
+                </div>
+                <div className="flex items-center gap-2 mt-2">
+                  <input type="checkbox" name="" id="" onChange={(e) => setSeller(e.target.checked)} />
+                  <p>I am a Seller</p>
                 </div>
               </div>
               <div className="">

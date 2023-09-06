@@ -23,11 +23,9 @@ export const filterSlice = createSlice({
     pathChange: (state, action) => {
       state.path = action.payload;
     },
-    resetSearch: (state) => {
-      state.searchText = "";
-    },
+    
   },
 });
 
-export const {searched, pathChange, resetSearch, setCategory, setSubCategory} = filterSlice.actions;
+export const {searched, pathChange, setCategory, setSubCategory} = filterSlice.actions;
 export default filterSlice.reducer;

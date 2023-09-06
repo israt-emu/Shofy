@@ -1,3 +1,4 @@
+//type defining for error'
 export interface IErrorProps {
   message: string;
 }

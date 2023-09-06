@@ -11,12 +11,6 @@ router.post("/", createProduct);
 router.get("/:id", getSingleProduct);
 router.delete("/:id", deleteProduct);
 router.patch("/:id", updateProduct);
-router.patch(
-  "/addReview/:id",
-  validateRequest(updateProductZodSchema),
-
-  addReview
-);
 router.get("/", getAllProduct);
 //
 export const ProductRoutes = router;

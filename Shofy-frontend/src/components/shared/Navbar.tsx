@@ -9,9 +9,11 @@ import {userLoggedOut} from "@/redux/features/auth/authSlice";
 import {useAppDispatch, useAppSelector} from "@/redux/hooks";
 import {FaCartPlus} from "react-icons/fa";
 import {useGetSingleCartQuery} from "@/redux/features/cart/cartApi";
+import {useGetSingleUserQuery} from "@/redux/features/auth/authApi";
 const Navbar = () => {
   const {user} = useAppSelector((state) => state?.auth);
   const {data} = useGetSingleCartQuery(user.id);
+  const {data: userData} = useGetSingleUserQuery(user?.id);
   const cartTotal = data?.data?.products?.length;
   const dispatch = useAppDispatch();
   //log out
@@ -19,6 +21,7 @@ const Navbar = () => {
     dispatch(userLoggedOut());
     localStorage.removeItem("auth");
   };
+  console.log(userData);
 
   return (
     <nav className="w-full h-16 fixed top backdrop-blur-lg z-10 text-primary">
@@ -44,14 +47,16 @@ const Navbar = () => {
                   </Link>
                 </Button>
               </li>
-              <li>
-                <Button variant="link" asChild>
-                  <Link to="/dashboard/seller" className="text-gray-900">
-                    Dashboard
-                  </Link>
-                </Button>
-              </li>
-
+              {userData?.data?.seller === true && (
+                <li>
+                  <Button variant="link" asChild>
+                    <Link to="/dashboard/seller" className="text-gray-900">
+                      Dashboard
+                    </Link>
+                  </Button>
+                </li>
+              )}
+              {/* //cart  */}
               <li>
                 <Link to="/cart" className="text-gray-900 flex items-center">
                   <FaCartPlus />
@@ -69,7 +74,7 @@ const Navbar = () => {
                   <DropdownMenuContent>
                     <DropdownMenuLabel>Account</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+                    {/* login signup btton render depending on users email  */}
                     {!user?.email && (
                       <>
                         <Link to="/login">
@@ -81,9 +86,12 @@ const Navbar = () => {
                       </>
                     )}
                     {user?.email && (
-                      <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
-                        Logout
-                      </DropdownMenuItem>
+                      <>
+                        <DropdownMenuItem className="cursor-pointer font-semibold font-serif">{userData?.data?.name?.firstName}</DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
+                          Logout
+                        </DropdownMenuItem>
+                      </>
                     )}
                   </DropdownMenuContent>
                 </DropdownMenu>

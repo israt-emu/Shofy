@@ -49,9 +49,9 @@ const ProductDetails = () => {
   }, [isSuccess, isError, addData]);
   return (
     <section className="">
-      <div className="md:container w-11/12 flex flex-col mx-auto lg:flex-row mt-4 py-8">
+      <div className="md:container w-11/12 flex flex-col items-center mx-auto lg:flex-row mt-4 py-8">
         <div className="w-full lg:w-1/3">
-          <img src={data?.data?.image} alt="product" />
+          <img src={data?.data?.image} alt="product" className="w-full" />
         </div>
         <div className="flex flex-col w-full p-6 lg:w-2/3 md:p-8 lg:p-12">
           <p className="text-2xl text-primary font-semibold font-serif">{data?.data?.name}</p>

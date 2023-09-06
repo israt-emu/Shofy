@@ -6,8 +6,10 @@ import {ICartProductProps} from "@/interfaces/product";
 import {useDeleteToCartMutation, useHandleQuantityMutation} from "@/redux/features/cart/cartApi";
 import {useAppSelector} from "@/redux/hooks";
 import Swal from "sweetalert2";
+import {useGetSingleProductQuery} from "@/redux/features/products/productApi";
 
 const CartCard = ({product}: ICartProductProps) => {
+  const {data: productData} = useGetSingleProductQuery({id: product.productId});
   //handling quantity
   const [handleQuantity] = useHandleQuantityMutation();
   const increaseQuantity = (operation: string) => {
@@ -37,7 +39,7 @@ const CartCard = ({product}: ICartProductProps) => {
       productId: product.productId,
     });
   };
-  //showing success or error message
+  //showing success or error message on delete
   useEffect(() => {
     if (!data?.success && isError) {
       Swal.fire("Oops!", `Something Went wrong`, "error");
@@ -52,8 +54,9 @@ const CartCard = ({product}: ICartProductProps) => {
     <Card className="text-black hover:shadow-xl p-2">
       <CardContent className="">
         <div className="grid md:grid-cols-4 justify-between md:items-center gap-2">
-          <img src="https://source.unsplash.com/random/300x300/?1" alt="card image" className="w-14 h-14" />
+          <img src={productData?.data?.image} alt="card image" className="w-14 h-14" />
           <div className="flex flex-col justify-center">
+            <p className="lg:text-center mt-3 text-sm font-medium mx-auto">{productData?.data?.category}</p>
             <p className="lg:text-center mt-3 text-sm font-medium mx-auto">{product?.name}</p>
           </div>
 

@@ -8,9 +8,9 @@ import logo from "../../assets/logo.png";
 import {useAppDispatch, useAppSelector} from "@/redux/hooks";
 import {sidebarActiveChange} from "@/redux/features/activeLink/activeLinkSlice";
 import {pathChange} from "@/redux/features/filter/filterSlice";
+//sidebar of seller dashboard
 const Sidebar = () => {
   //
-
   const active = useAppSelector((state) => state?.active?.sidebarActive);
   const path = useAppSelector((state) => state?.filter?.path);
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ const Sidebar = () => {
     const activeLink = path.split("/")[2];
     dispatch(sidebarActiveChange(activeLink));
   }, [path, dispatch]);
-  //
+  //changing path when route change
   useEffect(() => {
     dispatch(pathChange(location?.pathname));
   }, [location, dispatch]);

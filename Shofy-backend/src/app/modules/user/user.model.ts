@@ -34,12 +34,13 @@ const UserSchema = new Schema<IUser, UserModel>(
       type: String,
       required: true,
     },
+    seller: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: true,
-    toJSON: {
-      virtuals: true,
-    },
   }
 );
 //check user existence

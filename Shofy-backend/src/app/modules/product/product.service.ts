@@ -9,7 +9,13 @@ import {Product} from "./product.model";
 
 //add Product
 export const addProductService = async (payload: IProduct) => {
-  const newProduct = await Product.create(payload);
+  const {rating, version, ...others} = payload;
+  const data = {
+    ...others,
+    rating: [rating],
+    version: [version],
+  };
+  const newProduct = await Product.create(data);
   if (!newProduct) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Failed to create product!");
   }
@@ -45,7 +51,7 @@ export const getAllProductsService = async (filters: IProductFilters, pagination
     });
   }
   const whereCondition = andconditions?.length > 0 ? {$and: andconditions} : {};
-  const products = await Product.find(whereCondition).sort(sortConditions).skip(skip).limit(limit);
+  const products = await Product.find(whereCondition).sort(sortConditions).skip(skip);
   const count = await Product.countDocuments(whereCondition);
   return {
     meta: {

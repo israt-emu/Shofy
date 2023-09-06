@@ -12,6 +12,7 @@ const Footer = () => {
           <li>Pricing</li>
           <li>Contact</li>
         </ul>
+        {/* //social icons  */}
         <div className="flex flex-col justify-center pt-6 lg:pt-0 ">
           <div className="flex justify-center space-x-4">
             <a rel="noopener noreferrer" href="#" title="Instagram" className="flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-primary text-gray-50">

@@ -1,5 +1,5 @@
 import {api} from "../../api/apiSlice";
-
+///api for product operation
 export const productApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
@@ -42,15 +42,7 @@ export const productApi = api.injectEndpoints({
       }),
       invalidatesTags: ["Products"],
     }),
-    // addReview: builder.mutation({
-    //   query: ({id, data}) => ({
-    //     url: `/books/addReview/${id}`,
-    //     method: "PATCH",
-    //     body: data,
-    //   }),
-    //   invalidatesTags: ["Books", "singleBook"],
-    // }),
   }),
 });
 
-export const {useAddProductMutation, useDeleteProductMutation, useGetProductsQuery, useGetSingleProductQuery} = productApi;
+export const {useAddProductMutation, useDeleteProductMutation, useGetProductsQuery, useGetSingleProductQuery, useUpdateProductMutation} = productApi;

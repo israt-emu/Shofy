@@ -5,7 +5,7 @@ export type Review = {
 };
 export type IProduct = {
   name: string;
-  status: string;
+  status: "In Stock" | "Out of Stock";
   price: number;
   sku: string;
   size: number;

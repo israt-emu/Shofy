@@ -11,8 +11,10 @@ import {useEffect, useState} from "react";
 import Swal from "sweetalert2";
 import {useAppSelector} from "@/redux/hooks";
 const ProductCard = ({product}: IProductProps) => {
+  //
   const [quantity, setQuantity] = useState(1);
   const {user} = useAppSelector((state) => state.auth);
+  //adding product to cart
   const [addToCart, {data, isSuccess, isError}] = useAddToCartMutation();
   const handleAddToCart = () => {
     addToCart({
@@ -25,6 +27,7 @@ const ProductCard = ({product}: IProductProps) => {
       user: user.id,
     });
   };
+  //
   const handleQuantity = (operation: string) => {
     if (operation === "plus") {
       setQuantity(quantity + 1);
@@ -33,7 +36,7 @@ const ProductCard = ({product}: IProductProps) => {
       setQuantity(quantity - 1);
     }
   };
-  //
+  //showing success or error message when adding product
   useEffect(() => {
     if (!data?.success && isError) {
       Swal.fire("Oops!", `Something Went wrong`, "error");
@@ -47,9 +50,8 @@ const ProductCard = ({product}: IProductProps) => {
     <Card className="h-full">
       <Link to={`/product-details/${product._id}`}>
         <CardHeader>
-          <img src={"https://source.unsplash.com/random/300x300/?1"} alt="card image" className="h-44" />
+          <img src={product?.image} alt="card image" className="h-48" />
           <CardTitle>{product?.name}</CardTitle>
-          {/* <CardDescription>{product?.description}</CardDescription> */}
         </CardHeader>
         <CardContent>
           <p>Category:{product?.category}</p>

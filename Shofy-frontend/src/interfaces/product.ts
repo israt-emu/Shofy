@@ -1,3 +1,4 @@
+//type defining for product
 export type IProduct = {
   _id: string;
   name: string;

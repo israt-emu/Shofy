@@ -1,5 +1,6 @@
 import {api} from "../../api/apiSlice";
 import {userLoggedIn} from "./authSlice";
+//user authentication api's
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
@@ -38,18 +39,17 @@ export const authApi = api.injectEndpoints({
 
     getAllUsers: builder.query({
       query: () => ({
-        url: "/user/allUsers",
+        url: "/users",
         method: "GET",
       }),
     }),
-
     getSingleUser: builder.query({
-      query: (email) => ({
-        url: `/user/getSingleUser/${email}`,
+      query: (id) => ({
+        url: `/users/${id}`,
         method: "GET",
       }),
     }),
   }),
 });
 
-export const {useLoginMutation, useSignUpMutation} = authApi;
+export const {useLoginMutation, useSignUpMutation, useGetAllUsersQuery, useGetSingleUserQuery} = authApi;
