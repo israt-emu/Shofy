@@ -12,6 +12,8 @@ import Cart from "@/pages/Cart";
 import AddProduct from "@/pages/AddProduct";
 import EditProduct from "@/pages/EditProduct";
 import PrivateRoute from "./PrivateRoute";
+import Checkout from "@/pages/Checkout";
+import Orders from "@/pages/Orders";
 
 const routes = createBrowserRouter([
   {
@@ -72,6 +74,22 @@ const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Cart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/orders",
+        element: (
+          <PrivateRoute>
+            <Orders />
           </PrivateRoute>
         ),
       },

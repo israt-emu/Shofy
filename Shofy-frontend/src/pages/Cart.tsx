@@ -5,6 +5,7 @@ import {Button} from "@/components/ui/button";
 import {ICartProduct} from "@/interfaces/product";
 import {useGetSingleCartQuery} from "@/redux/features/cart/cartApi";
 import {useAppSelector} from "@/redux/hooks";
+import {Link} from "react-router-dom";
 
 const Cart = () => {
   const {user} = useAppSelector((state) => state.auth);
@@ -34,7 +35,9 @@ const Cart = () => {
           <h3>Total</h3>
           <h3>{data?.data?.products?.reduce((acc: any, product: ICartProduct) => acc + product.quantity * product.price, 0).toFixed(2)}৳</h3>
         </div>
-        <Button className="w-1/5 ml-auto">Checkout</Button>
+        <Link className="w-1/5 ml-auto" to="/checkout">
+          <Button className="">Checkout</Button>
+        </Link>
       </div>
     </div>
   );

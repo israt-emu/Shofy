@@ -47,6 +47,20 @@ const Navbar = () => {
                   </Link>
                 </Button>
               </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link to="/checkout" className="text-gray-900">
+                    Checkout
+                  </Link>
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" asChild>
+                  <Link to="/orders" className="text-gray-900">
+                    Orders
+                  </Link>
+                </Button>
+              </li>
               {userData?.data?.seller === true && (
                 <li>
                   <Button variant="link" asChild>
