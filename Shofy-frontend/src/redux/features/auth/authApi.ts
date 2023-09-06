@@ -9,7 +9,7 @@ export const authApi = api.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      async onQueryStarted(arg, {queryFulfilled, dispatch}) {
+      async onQueryStarted(_arg, {queryFulfilled, dispatch}) {
         try {
           const result = await queryFulfilled;
           localStorage.setItem(

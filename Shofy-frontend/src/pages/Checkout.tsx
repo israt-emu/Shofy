@@ -7,6 +7,7 @@ import {useGetSingleCartQuery} from "@/redux/features/cart/cartApi";
 import {useAddOrderMutation} from "@/redux/features/order/orderApi";
 import {useAppSelector} from "@/redux/hooks";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Checkout = () => {
@@ -42,7 +43,7 @@ const Checkout = () => {
       });
   };
   //showing success or error message
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     if (!addData?.success && isError) {
       Swal.fire("Oops!", `Something Went wrong`, "error");
@@ -50,9 +51,9 @@ const Checkout = () => {
 
     if (addData?.success && addData?.data) {
       Swal.fire("Congratulations!", `Order Placed successfully!`, "success");
-      //   navigate("/dashboard/manage");
+      navigate("/orders");
     }
-  }, [isSuccess, isError, addData]);
+  }, [isSuccess, isError, addData, navigate]);
   return data?.data?.products?.length > 0 ? (
     <div className="my-6 mx-auto">
       <h1 className="font-semibold font-serif text-3xl text-center mb-2">Checkout Form</h1>
@@ -106,7 +107,7 @@ const Checkout = () => {
       </form>
     </div>
   ) : (
-    <div className="my-12 mx-auto w-9/12 h-[350px]">
+    <div className="my-12 mx-auto w-9/12 md:h-[350px]">
       <h1 className="font-semibold font-serif text-center text-4xl">Nothing to checkout!</h1>
     </div>
   );

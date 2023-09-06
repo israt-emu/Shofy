@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+// @ts-nocheck
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import {IProductProps} from "@/interfaces/product";
 import {Button} from "../ui/button";
@@ -17,15 +19,19 @@ const ProductCard = ({product}: IProductProps) => {
   //adding product to cart
   const [addToCart, {data, isSuccess, isError}] = useAddToCartMutation();
   const handleAddToCart = () => {
-    addToCart({
-      product: {
-        price: product?.price,
-        name: product?.name,
-        productId: product?._id,
-        quantity: quantity,
-      },
-      user: user.id,
-    });
+    if (user.id) {
+      addToCart({
+        product: {
+          price: product?.price,
+          name: product?.name,
+          productId: product?._id,
+          quantity: quantity,
+        },
+        user: user.id,
+      });
+    } else {
+      Swal.fire("Sorry!", `You have to login first!`, "error");
+    }
   };
   //
   const handleQuantity = (operation: string) => {

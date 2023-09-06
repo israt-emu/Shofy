@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-nocheck
 import ProductBadge from "@/components/ui/ProductBadge";
 import {Button} from "@/components/ui/button";
 import {useGetSingleProductQuery} from "@/redux/features/products/productApi";

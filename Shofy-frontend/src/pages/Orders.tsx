@@ -31,8 +31,8 @@ const Orders = () => {
       Swal.fire("Oops!", `Something Went wrong`, "error");
     }
   }, [isSuccess, isError, paymentData]);
-  return (
-    <div className="w-9/12 mx-auto py-8">
+  return data?.data?.length > 0 ? (
+    <div className="w-9/12 mx-auto py-14">
       <div className="flex items-center mb-3">
         <p className="text-xl font-semibold font-serif">Your Orders:</p>
       </div>
@@ -57,10 +57,14 @@ const Orders = () => {
               <span className="font-semibold text-lg">Products: </span>
               {order.products?.length}
             </p>
-            <Button onClick={() => handlePayment(order)}>Make Payment</Button>
+            {order.payment === "pending" ? <Button onClick={() => handlePayment(order)}>Make Payment</Button> : <Button className="bg-green-700 text-gray-100 hover:bg-green-700">Payment Complete</Button>}
           </div>
         ))}
       </div>
+    </div>
+  ) : (
+    <div className="my-12 mx-auto w-9/12 h-[350px]">
+      <h1 className="font-semibold font-serif text-center text-4xl">No orders found!</h1>
     </div>
   );
 };

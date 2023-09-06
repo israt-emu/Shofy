@@ -17,7 +17,6 @@ app.use(cookieParser());
 //parser
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-//use route
 
 //payment initialization api
 app.post(
@@ -30,15 +29,14 @@ app.post(
     }
   ) => {
     const payload = req.body;
-    console.log(payload);
     const data = {
       total_amount: payload.total_amount,
       currency: "BDT",
       tran_id: payload.tran_id,
-      success_url: "http://localhost:3000/success",
-      fail_url: "http://localhost:3000/failure",
-      cancel_url: "http://localhost:3000/cancel",
-      ipn_url: "http://localhost:3000/ipn",
+      success_url: "https://shofy-backend-virid.vercel.app/success",
+      fail_url: "https://shofy-backend-virid.vercel.app/failure",
+      cancel_url: "https://shofy-backend-virid.vercel.app/cancel",
+      ipn_url: "https://shofy-backend-virid.vercel.app/ipn",
       shipping_method: payload.shipping_method,
       product_name: "computer",
       product_category: "Electronic",
@@ -69,7 +67,6 @@ app.post(
     };
     const sslcz = new SSLCommerzPayment(config.store_id, config.store_pass, false);
     sslcz.init(data).then((apiResponse: {GatewayPageURL: any}) => {
-      console.log(apiResponse.GatewayPageURL);
       const GatewayPageURL = apiResponse.GatewayPageURL;
       res.json(GatewayPageURL);
     });
@@ -77,20 +74,20 @@ app.post(
 );
 app.post("/success", async (req, res) => {
   const result = await updateOrderService(req.body.tran_id);
-  res.redirect(`http://localhost:5173/orders`);
+  res.redirect(`https://shofy-e-commerce.netlify.app/orders`);
 });
 app.post("/fail", async (req, res) => {
-  res.redirect(`http://localhost:5731/orders`);
+  res.redirect(`https://shofy-e-commerce.netlify.app/orders`);
 });
 app.post("/cancel", async (req, res) => {
-  res.redirect(`http://localhost:5731`);
+  res.redirect(`https://shofy-e-commerce.netlify.app/`);
 });
 app.post("/ipn", (req, res) => {
   console.log(req.body);
   res.send(req.body);
 });
 
-//
+////use route
 app.use("/api/v1", router);
 app.get("/", (req: Request, res: Response) => {
   res.send("Server is Listening..");

@@ -25,7 +25,7 @@ const Cart = () => {
     content = data?.data?.products?.length > 0 && data?.data?.products?.map((product: ICartProduct, i: number) => <CartCard product={product} key={i} />);
   }
   return (
-    <div className="w-9/12 mx-auto py-8">
+    <div className="w-9/12 mx-auto py-12">
       <div className="flex items-center mb-3">
         <p className="text-xl font-semibold font-serif">Shopping Cart:</p>
       </div>
@@ -35,9 +35,12 @@ const Cart = () => {
           <h3>Total</h3>
           <h3>{data?.data?.products?.reduce((acc: any, product: ICartProduct) => acc + product.quantity * product.price, 0).toFixed(2)}৳</h3>
         </div>
-        <Link className="w-1/5 ml-auto" to="/checkout">
-          <Button className="">Checkout</Button>
-        </Link>
+
+        <Button className="w-1/6 ml-auto">
+          <Link className="" to="/checkout">
+            Checkout
+          </Link>
+        </Button>
       </div>
     </div>
   );
