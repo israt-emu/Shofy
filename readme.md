@@ -1,4 +1,4 @@
-### Backend:https://shofy-backend-gfh55g7ki-israt-emu.vercel.app/
+### Backend:https://shofy-backend-virid.vercel.app/
 
 ### Frontend: https://shofy-e-commerce.netlify.app/
 
