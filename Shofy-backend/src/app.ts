@@ -76,7 +76,7 @@ app.post("/success", async (req, res) => {
   const result = await updateOrderService(req.body.tran_id);
   res.redirect(`https://shofy-e-commerce.netlify.app/orders`);
 });
-app.post("/fail", async (req, res) => {
+app.post("/failure", async (req, res) => {
   res.redirect(`https://shofy-e-commerce.netlify.app/orders`);
 });
 app.post("/cancel", async (req, res) => {
